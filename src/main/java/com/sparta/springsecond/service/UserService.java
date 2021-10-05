@@ -50,6 +50,12 @@ public class UserService {
         String password = passwordEncoder.encode(requestDto.getPassword());
         String email = requestDto.getEmail();
 
+        // 이메일 중복 확인
+        Optional<User> foundEmail = userRepository.findByEmail(email);
+        if (foundEmail.isPresent()) {
+            throw new IllegalArgumentException("이미 사용중인 이메일 입니다");
+        }
+
         // 사용자 ROLE 확인
         UserRoleEnum role = UserRoleEnum.USER;
         if (requestDto.isAdmin()) {
