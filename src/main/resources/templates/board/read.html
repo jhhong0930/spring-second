@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./layout/basic.html :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+
+        <div style="min-height: 858px;">
+
+            <div class="content-area" style="width: 600px; margin: 50px auto">
+
+                <div align="center">
+                    <th:block th:if="${username == board.username}">
+                        <button type="button" class="btn btn-warning" th:onclick="location.href='/boards/[[${board.bno}]]/edit'">게시글 관리</button>
+                    </th:block>
+                    <button type="button" class="btn btn-dark" th:onclick="location.href='/'">목록으로</button>
+                </div>
+
+                <div class="form-group">
+                    <label>작성자</label>
+                    <input type="text" class="form-control" name="title" th:value="${board.username}" readonly>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label>글 제목</label>
+                    <textarea style="resize: none" class="form-control" rows="2" name="content" readonly>[[${board.title}]]</textarea>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label>글 내용</label>
+                    <textarea style="resize: none" class="form-control" rows="10" name="content" readonly>[[${board.content}]]</textarea>
+                </div>
+
+                <br>
+
+
+            </div>
+
+
+        </div>
+
+    </th:block>
+
+</th:block>
+
+</html>
