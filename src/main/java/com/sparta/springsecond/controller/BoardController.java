@@ -67,4 +67,34 @@ public class BoardController {
         return "board/read";
     }
 
+    // 게시글 수정 페이지
+    @GetMapping("/boards/{bno}/edit")
+    public String updateForm(@PathVariable Long bno, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        if (userDetails != null) {
+            model.addAttribute("username", userDetails.getUsername());
+        }
+
+        model.addAttribute("board", boardService.read(bno));
+
+        return "board/edit";
+    }
+
+    // 게시글 수정 기능
+    @PostMapping("/boards/{bno}/edit")
+    public String update(@PathVariable Long bno, BoardRequestDto requestDto) {
+
+        boardService.update(bno, requestDto);
+
+        return "redirect:/boards/" + bno;
+    }
+
+    // 게시글 삭제 기능
+    @PostMapping("/boards/{bno}/delete")
+    public String delete(@PathVariable Long bno) {
+
+        boardService.delete(bno);
+
+        return "redirect:/";
+    }
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./layout/basic.html :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+
+        <div style="min-height: 858px;">
+
+            <div class="content-area" style="width: 600px; margin: 50px auto">
+
+                <div align="center">
+                    <button type="button" class="btn btn-primary modifyBtn">게시글 수정</button>
+                    <button type="button" class="btn btn-danger removeBtn">게시글 삭제</button>
+                </div>
+
+                <div class="form-group">
+                    <label>작성자</label>
+                    <input type="text" class="form-control" name="title" th:value="${board.username}" readonly>
+                </div>
+
+                <br>
+
+                <form action="" method="post">
+
+                    <div class="form-group">
+                        <label>글 제목</label>
+                        <textarea style="resize: none" class="form-control" rows="2" name="title">[[${board.title}]]</textarea>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label>글 내용</label>
+                        <textarea style="resize: none" class="form-control" rows="10" name="content">[[${board.content}]]</textarea>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <script th:inline="javascript">
+
+            var actionForm = $("form");
+
+            $(".modifyBtn").click(function() {
+                if (!confirm("수정 하시겠습니까?")) {
+                    return;
+                }
+
+                actionForm
+                    .attr("action", "/boards/" +  [[${board.bno}]] + "/edit")
+                    .attr("method", "post");
+
+                actionForm.submit();
+            });
+
+            $(".removeBtn").click(function() {
+                if (!confirm("삭제 하시겠습니까?")) {
+                    return;
+                }
+
+                actionForm
+                    .attr("action", "/boards/" + [[${board.bno}]] +"/delete")
+                    .attr("method", "post");
+
+                actionForm.submit();
+            });
+
+        </script>
+
+    </th:block>
+
+</th:block>
+
+</html>
