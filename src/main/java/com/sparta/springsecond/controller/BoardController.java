@@ -12,11 +12,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
 
     private final BoardService boardService;
+
+    // 게시글 전체 조회(메인페이지)
+    @GetMapping("/")
+    public String getList(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        if (userDetails != null) {
+            model.addAttribute("username", userDetails.getUsername());
+        }
+
+        model.addAttribute("list", boardService.getList());
+
+        return "mainPage";
+    }
 
     // 게시글 작성 페이지
     @GetMapping("/boards/new")

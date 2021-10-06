@@ -4,6 +4,7 @@ import com.sparta.springsecond.domain.Board;
 import com.sparta.springsecond.dto.BoardRequestDto;
 import com.sparta.springsecond.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class BoardService {
 
     // 게시글 전체 조회
     public List<Board> getList() {
-        return boardRepository.findAll();
+        return boardRepository.findAll(Sort.by("regDate").descending());
     }
 
     // 게시글 작성
