@@ -23,10 +23,10 @@ public class Board extends BaseEntity {
 
     private String content;
 
-    private Long userId;
+    private String username;
 
-    public Board(BoardRequestDto requestDto, Long userId) {
-        this.userId = userId;
+    public Board(BoardRequestDto requestDto, String username) {
+        this.username = username;
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
     }

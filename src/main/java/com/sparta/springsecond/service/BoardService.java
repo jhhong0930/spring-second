@@ -20,13 +20,11 @@ public class BoardService {
     }
 
     // 게시글 작성
-    public Long register(BoardRequestDto requestDto, Long userId) {
+    public void register(BoardRequestDto requestDto, String username) {
 
-        Board board = new Board(requestDto, userId);
+        Board board = new Board(requestDto, username);
 
         boardRepository.save(board);
-
-        return board.getBno();
     }
 
     // 게시글 조회

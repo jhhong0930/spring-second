@@ -23,7 +23,6 @@ public class BoardController {
     public String registerForm(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         if (userDetails != null) {
-            model.addAttribute("userId", userDetails.getUser().getId());
             model.addAttribute("username", userDetails.getUsername());
         }
 
@@ -32,9 +31,9 @@ public class BoardController {
 
     // 게시글 작성 기능
     @PostMapping("/boards/new")
-    public String register(@ModelAttribute BoardRequestDto requestDto, Long userId) {
+    public String register(@ModelAttribute BoardRequestDto requestDto, String username) {
 
-        Long bno = boardService.register(requestDto, userId);
+        boardService.register(requestDto, username);
 
         return "redirect:/";
     }
