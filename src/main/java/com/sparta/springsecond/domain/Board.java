@@ -40,4 +40,8 @@ public class Board extends BaseEntity {
         this.content = content;
     }
 
+    public void addReply(Reply reply) {
+        this.replies.add(reply);
+    }
+
 }
