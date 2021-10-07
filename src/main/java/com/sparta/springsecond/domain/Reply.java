@@ -31,4 +31,8 @@ public class Reply extends BaseEntity {
         this.content = requestDto.getContent();
     }
 
+    public void changeContent(String content) {
+        this.content = content;
+    }
+
 }
