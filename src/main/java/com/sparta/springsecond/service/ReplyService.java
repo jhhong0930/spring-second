@@ -26,11 +26,11 @@ public class ReplyService {
 
     // 댓글 작성
     @Transactional
-    public void register(ReplyRequestDto requestDto, String username, Long bno) {
+    public Reply register(ReplyRequestDto requestDto, String username) {
 
-        Reply reply = new Reply(requestDto, username, bno);
+        Reply reply = new Reply(requestDto, username);
 
-        Board board = boardRepository.findById(bno)
+        Board board = boardRepository.findById(reply.getBno())
                 .orElseThrow(() -> new NullPointerException("해당 게시글을 찾을수 없습니다."));
 
         if (board != null) {
@@ -39,9 +39,7 @@ public class ReplyService {
             boardRepository.save(board);
         }
 
-
-
-        replyRepository.save(reply);
+        return reply;
     }
 
     // 댓글 수정

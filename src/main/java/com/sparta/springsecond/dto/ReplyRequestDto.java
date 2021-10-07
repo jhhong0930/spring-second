@@ -12,5 +12,6 @@ import lombok.Setter;
 public class ReplyRequestDto {
 
     private String content;
+    private Long bno;
 
 }

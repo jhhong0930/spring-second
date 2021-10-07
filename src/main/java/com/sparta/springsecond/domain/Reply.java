@@ -25,10 +25,10 @@ public class Reply extends BaseEntity {
 
     private Long bno;
 
-    public Reply(ReplyRequestDto requestDto, String username, Long bno) {
+    public Reply(ReplyRequestDto requestDto, String username) {
         this.username = username;
-        this.bno = bno;
         this.content = requestDto.getContent();
+        this.bno = requestDto.getBno();
     }
 
     public void changeContent(String content) {
