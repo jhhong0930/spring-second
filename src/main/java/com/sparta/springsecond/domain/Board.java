@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @ToString
 @Getter
@@ -24,6 +22,9 @@ public class Board extends BaseEntity {
     private String content;
 
     private String username;
+
+    @OneToMany
+    private List<Reply> replies;
 
     public Board(BoardRequestDto requestDto, String username) {
         this.username = username;
