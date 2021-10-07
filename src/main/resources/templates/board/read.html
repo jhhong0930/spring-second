@@ -16,6 +16,9 @@
                     <button type="button" class="btn btn-dark" th:onclick="location.href='/'">목록으로</button>
                 </div>
 
+                <input type="hidden" id="bno" th:value="${board.bno}">
+                <input type="hidden" id="username" th:value="${username}">
+
                 <div class="form-group">
                     <label>작성자</label>
                     <input type="text" class="form-control" name="title" th:value="${board.username}" readonly>
@@ -36,12 +39,68 @@
                 </div>
 
                 <br>
+                <br>
 
+                <!-- reply -->
+                <div class="form-group">
+                    <label>댓글 작성</label>
+                    <textarea style="resize: none" class="form-control reply-box" rows="3"></textarea>
+                </div>
+
+                <br>
+
+                <div align="center">
+                    <button class="btn btn-outline-primary" onclick="writer_reply()">작성하기</button>
+                </div>
+
+                <div class="reply-area">
+
+                </div>
 
             </div>
 
-
         </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+            })
+
+            // 댓글 작성
+            function writer_reply() {
+
+                let content = $(".reply-box").val();
+                let bno = $("#bno").val();
+                let username = $("#username").val();
+
+                let data = {"content": content, "bno": bno}
+
+                console.log(content);
+                console.log(bno);
+                console.log(username);
+
+                if (username === '') {
+                    alert('로그인을 먼저 해주세요');
+                    location.href='/user/login';
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/api/replies',
+                        contentType: "application/json",
+                        data: JSON.stringify(data)
+                        , success: function (response) {
+                            alert('댓글이 작성되었습니다');
+                            window.location.reload();
+                        }
+                    });
+                }
+
+            }
+
+
+        </script>
 
     </th:block>
 
