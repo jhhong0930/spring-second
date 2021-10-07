@@ -53,8 +53,14 @@
                     <button class="btn btn-outline-primary" onclick="writer_reply()">작성하기</button>
                 </div>
 
-                <div class="reply-area">
-
+                <div class="reply-area" align="center">
+                    <table>
+                        <tr th:each="reply : ${reply}">
+                            <td width="100px">[[${reply.username}]]</td>
+                            <td width="350px">[[${reply.content}]]</td>
+                            <td width="150px">[[${#temporals.format(reply.regDate, 'MM/dd HH:mm')}]]</td>
+                        </tr>
+                    </table>
                 </div>
 
             </div>
@@ -64,7 +70,7 @@
         <script>
 
             $(document).ready(function () {
-
+                show_reply();
             })
 
             // 댓글 작성
@@ -98,6 +104,21 @@
                 }
 
             }
+
+            // // 댓글 조회
+            // function show_reply() {
+            //
+            //     let bno = $("#bno").val();
+            //
+            //     $.ajax({
+            //         type: "GET",
+            //         url: 'api/replies/' + bno,
+            //         success: function (response) {
+            //             console.log(response);
+            //         }
+            //     })
+            //
+            // }
 
 
         </script>

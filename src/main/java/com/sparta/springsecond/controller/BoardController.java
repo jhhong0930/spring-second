@@ -4,6 +4,7 @@ import com.sparta.springsecond.domain.Board;
 import com.sparta.springsecond.dto.BoardRequestDto;
 import com.sparta.springsecond.security.UserDetailsImpl;
 import com.sparta.springsecond.service.BoardService;
+import com.sparta.springsecond.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final ReplyService replyService;
 
     // 게시글 전체 조회(메인페이지)
     @GetMapping("/")
@@ -63,6 +65,7 @@ public class BoardController {
         }
 
         model.addAttribute("board", boardService.read(bno));
+        model.addAttribute("reply", replyService.getList(bno));
 
         return "board/read";
     }
