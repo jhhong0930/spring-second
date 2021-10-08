@@ -57,7 +57,7 @@
 
                 <div class="reply-area" align="center">
                     <table>
-                        <tr th:each="reply, index : ${reply}">
+                        <tr th:each="reply : ${reply}">
                             <input type="hidden" class="rno" th:value="${reply.rno}">
                             <td width="100px">[[${reply.username}]]</td>
                             <td width="350px">[[${reply.content}]]</td>
