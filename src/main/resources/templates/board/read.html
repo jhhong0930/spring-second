@@ -62,7 +62,7 @@
                             <td width="100px">[[${reply.username}]]</td>
                             <td width="350px">[[${reply.content}]]</td>
                             <td width="100px">[[${#temporals.format(reply.regDate, 'MM/dd HH:mm')}]]</td>
-                            <td th:if="${username == board.username}">
+                            <td th:if="${username == reply.username}">
                                 <button class="btn btn-sm btn-outline-warning"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modify-reply"

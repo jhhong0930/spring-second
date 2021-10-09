@@ -37,7 +37,7 @@ public class BoardController {
     }
 
     // 게시글 작성 페이지
-    @GetMapping("/boards/new")
+    @GetMapping("/new")
     public String registerForm(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         if (userDetails != null) {
